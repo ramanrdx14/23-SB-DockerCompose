@@ -1,0 +1,29 @@
+services:
+  application:
+    image: spring-boot-drinksbar
+    ports:
+      - "8080:8080"
+    networks:
+      - spring-boot-net
+    depends_on:
+      - mysqldb
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/sbms26
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+    volumes:
+      - ./data/springboot-app:/data/springboot-app
+
+  mysqldb:
+    image: mysql:5.7
+    networks:
+      - spring-boot-net
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=sbms26
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+
+networks:
+  spring-boot-net:
+    driver: bridge
