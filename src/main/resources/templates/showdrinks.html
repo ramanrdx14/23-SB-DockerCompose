@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Drinks Bar</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background:#f4f7fb;
+            padding:40px;
+        }
+
+        h1{
+            text-align:center;
+            color:#333;
+            margin-bottom:30px;
+        }
+
+        .container{
+            width:90%;
+            max-width:900px;
+            margin:auto;
+        }
+
+        .card{
+            background:white;
+            padding:25px;
+            border-radius:10px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom:30px;
+        }
+
+        .form-group{
+            margin-bottom:18px;
+        }
+
+        label{
+            display:block;
+            margin-bottom:6px;
+            font-weight:bold;
+            color:#444;
+        }
+
+        input{
+            width:100%;
+            padding:10px;
+            border:1px solid #ccc;
+            border-radius:5px;
+            font-size:15px;
+        }
+
+        input:focus{
+            outline:none;
+            border-color:#2196F3;
+            box-shadow:0 0 5px rgba(33,150,243,.4);
+        }
+
+        button{
+            width:100%;
+            padding:12px;
+            background:#2196F3;
+            color:white;
+            border:none;
+            border-radius:5px;
+            font-size:16px;
+            cursor:pointer;
+            transition:.3s;
+        }
+
+        button:hover{
+            background:#1565c0;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            background:white;
+            box-shadow:0 5px 15px rgba(0,0,0,.1);
+            border-radius:10px;
+            overflow:hidden;
+        }
+
+        thead{
+            background:#2196F3;
+            color:white;
+        }
+
+        th,td{
+            padding:14px;
+            text-align:center;
+            border-bottom:1px solid #ddd;
+        }
+
+        tbody tr:nth-child(even){
+            background:#f9f9f9;
+        }
+
+        tbody tr:hover{
+            background:#eef6ff;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🍹 Drinks Bar Management</h1>
+
+    <div class="card">
+
+        <form method="post" action="/add" th:object="${emptyObj}">
+
+            <div class="form-group">
+                <label>Drink Name</label>
+                <input type="text" th:field="*{drinkName}">
+            </div>
+
+            <div class="form-group">
+                <label>Drink Cost</label>
+                <input type="text" th:field="*{drinkCost}">
+            </div>
+
+            <div class="form-group">
+                <label>Drink Quantity</label>
+                <input type="text" th:field="*{drinkQuantity}">
+            </div>
+
+            <button type="submit">Add Drink</button>
+
+        </form>
+
+    </div>
+
+    <table>
+
+        <thead>
+        <tr>
+            <th>Drink ID</th>
+            <th>Drink Name</th>
+            <th>Cost (₹)</th>
+            <th>Quantity</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr th:each="drink : ${drinks}">
+            <td th:text="${drink.drinkId}"></td>
+            <td th:text="${drink.drinkName}"></td>
+            <td th:text="${drink.drinkCost}"></td>
+            <td th:text="${drink.drinkQuantity}"></td>
+        </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+</html>
